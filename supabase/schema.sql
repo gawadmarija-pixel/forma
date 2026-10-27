@@ -32,3 +32,5 @@ create policy "forma: usunięcie własnych danych" on public.forma_state
 -- 4. Niezalogowani (rola anon) nie mają żadnego dostępu do tabeli.
 revoke all on public.forma_state from anon;
 grant select, insert, update, delete on public.forma_state to authenticated;
+-- TRUNCATE omija RLS — zalogowani go nie potrzebują.
+revoke truncate, references, trigger on public.forma_state from authenticated;
